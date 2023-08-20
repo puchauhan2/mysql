@@ -1,0 +1,55 @@
+CREATE USER 'word'@'localhost' IDENTIFIED BY 'India@123@india';
+
+GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'%' IDENTIFIED BY 'India@123@india';
+
+
+CREATE USER 'replica'@'localhost' IDENTIFIED BY 'India@123@india';
+
+
+grant replication slave on *.* TO 'word'@'10.50.0.101' identified by 'India@123@india';
+
+
+
+ojiX-ia;g0Zx
+
+
+ojiX-ia;g0Zx
+
+
+india
+after loading dump
+
+UNLOCK TABLES;
+
+CHANGE MASTER TO MASTER_HOST='10.50.0.92',
+MASTER_USER='word'
+MASTER_PASSWORD='India@123@india',
+MASTER_LOG_FILE='mysql-bin.000004'
+MASTER_LOG_POS=974;
+
+ CHANGE MASTER TO MASTER_HOST = '10.50.0.92',MASTER_USER = 'root', MASTER_PASSWORD = 'India@123@india', MASTER_LOG_FILE = 'mysql-bin.000007', MASTER_LOG_POS = 154;
+
+ CHANGE MASTER TO MASTER_LOG_FILE='log-bin.000005', MASTER_LOG_POS=75878;
+
+
+ create table wordpress.crobra (`id` varchar(10));
+
+show global variables like '%para%';
+
+
+_____________________________________________________________________
+
+mysql> CREATE USER 'repl'@'%.example.com' IDENTIFIED BY 'password';
+
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.example.com';
+
+
+FLUSH TABLES WITH READ LOCK;            /// lock write on db ,uanble to write any things or read
+
+shell> mysqldump --all-databases --master-data > dbdump.db
+
+UNLOCK TABLES;
+
+SHOW SLAVE HOSTS;
+
+RESET SLAVE 

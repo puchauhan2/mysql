@@ -1,0 +1,9 @@
+
+
+ show slave status \G
+
+ show warnings;
+
+ show processlist \G
+
+ show global variables like '%GTID%';

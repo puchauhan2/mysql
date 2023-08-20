@@ -1,0 +1,66 @@
+https://www.howtoforge.com/tutorial/how-to-setup-mysql-master-master-replication/
+
+https://tecadmin.net/how-to-set-up-mysql-master-master-replication/
+
+https://support.rackspace.com/how-to/set-up-mysql-master-slave-replication/
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql
+
+
+
+SHOW SLAVE STATUS\G
+SHOW master STATUS\G
+
+-----------------------------------------------------------------------------------------
+Master side 
+
+
+
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl_user'@'192.168.1.20'    
+IDENTIFIED BY 'secretpassword';
+
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'root'@'%' IDENTIFIED BY 'India@123@india';
+
+mysql> FLUSH PRIVILEGES;
+
+mysql> use mydb;
+mysql> FLUSH TABLES WITH READ LOCK;
+mysql> exit;
+
+------------------------------------------------------------------------------------------
+Slave side **************
+
+
+# vim /etc/my.cnf
+ [mysqld]
+ server-id=2
+ replicate-do-db=mydb
+
+ # /etc/init.d/mysqld restart
+ # mysql -u root -p mydb < mydb.sql
+
+ mysql>  CHANGE MASTER TO MASTER_HOST='192.168.1.10',
+-> MASTER_USER='repl_user',
+-> MASTER_PASSWORD='secretpassword',
+-> MASTER_LOG_FILE='mysql-bin.000002',
+-> MASTER_LOG_POS=107;
+
+or 
+
+CHANGE MASTER TO MASTER_HOST = '10.50.0.92',MASTER_USER = 'word', MASTER_PASSWORD = 'India@123@india', MASTER_LOG_FILE = 'mysql-bin.000005', MASTER_LOG_POS = 75878;
+
+
+
+mysql> SLAVE START;
+mysql> show slave status \G
+
+------------------------------------------------------------------------------------------
+log analyis
+
+show processlist;
+
+to remove slave config 
+> stop slave 
+> reset slave
+> reset master
+

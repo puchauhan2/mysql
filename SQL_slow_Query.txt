@@ -1,0 +1,78 @@
+
+Reference https://www.youtube.com/watch?v=noFn2sgQiNw
+
+https://www.cyberciti.biz/faq/how-to-set-and-enable-mariadb-slow-query-log-linux-unix/
+
+1)To show global settign related with slow
+
+> show global variables like '%slow%';
+
+2)To enable slow query 
+
+> set global slow_query_log = 1;
+
+3)To change time hit query
+
+> select @@global.long_query_time;
+
+default will 10 sec make it 1 0r 2 sec Or set 0 (to trace all query) 
+
+> set global long_query_time = 0; // it will set 0 sec 
+
+4) *******Default log path  /var/lib/mysql/
+
+5) to pending process on databases > show processlist;
+
+
++----+------+-----------+-----------+---------+------+-------+------------------+----------+
+| Id | User | Host      | db        | Command | Time | State | Info             | Progress |
++----+------+-----------+-----------+---------+------+-------+------------------+----------+
+|  3 | root | localhost | NULL      | Query   |    0 | init  | show processlist |    0.000 |
+| 29 | root | localhost | wordpress | Sleep   |    0 |       | NULL             |    0.000 |
++----+------+-----------+-----------+---------+------+-------+------------------+----------+
+
+
+--------------------------------------------------------------------------------------------------------------
+
+
+How to activating the slow query Log
+Edit my.cnf or mariadb.cnf stored in /etc/mysql/ directory. In this example I am editing the /etc/mysql/mariadb.conf.d/50-server.cnf file:
+
+
+Append the following syntax in [mysqld] section:
+
+slow_query_log = 1
+long_query_time = 1
+slow_query_log_file = /var/lib/mysql/slow-query.log // can keep any things 
+log_queries_not_using_indexes
+Save and close the file. Where,
+
+slow_query_log = 1 – Enable the slow query log.
+long_query_time = 1 – Set time in seconds/microseconds defining a slow query.
+slow_query_log_file = /var/log/mysql/slow-query.log – Name of the slow query log file
+log_queries_not_using_indexes – Whether to log queries that don’t use indexes
+
+Restart the mariadb server
+
+Type the following command:
+
+$ sudo /etc/init.d/mysql restart
+
+OR
+$ sudo systemctl restart mysql
+
+OR for RHEL/CentoS
+$ sudo systemctl restart mysqld
+
+View your slow query log
+
+Type the following command:
+$ sudo tail -f /var/lib/mysql/slow-query.log or may be different 
+
+You need to use the pt-query-digest to analyzes MySQL queries from slow, general, and binary log files.
+
+ Percona Toolkit Tools Every MySQL DBA 
+
+ ***sudo pt-query-digest /var/lib/mysql/localhost-slow.log >  wow_log1.txt to save into file 
+
+$ pt-query-digest /var/lib/mysql/slow-query.log or may be different

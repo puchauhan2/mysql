@@ -1,0 +1,26 @@
+mysql -u root -p  with password 
+mysql -u root     with out password 
+
+CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'india@123';
+
+CREATE DATABASE wpdatabase;
+
+GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost'; //  for full access 
+
+GRANT type_of_permission ON database_name.table_name TO ‘username’@'localhost’;
+
+GRANT ALL PRIVILEGES ON wpdatabase.* TO 'wordpressuser'@'localhost'; // * refers all table in that data base 
+
+
+use wpdatabase;  // to select data bases 
+
+https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
+
+DROP DATABASE Flowers;   // to delete 
+
+
+subbareddy.p@brainvire.com
+
+santosh.das@brainvire.com
+
+yatin.chavan@brainvire.com

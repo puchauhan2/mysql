@@ -1,0 +1,20 @@
+https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-howto.html
+
+
+
+
+
+
+
+CHANGE MASTER TO MASTER_HOST = '10.50.0.92', MASTER_USER = 'root', MASTER_PASSWORD = 'India@123@india', MASTER_AUTO_POSITION = 1;
+
+
+PURGE BINARY LOGS BEFORE '2015-07-21 23:59:59';
+
+purge binary logs to 'mysql-bin.000227';
+
+
+SET GTID_NEXT='0d4ede3f-f6c7-11e8-9390-000c29cbe2d5:1-265';
+
+
+SELECT @@GLOBAL.GTID_EXECUTED;

@@ -1,0 +1,41 @@
+https://www.linode.com/docs/databases/mysql/use-mysqldump-to-back-up-mysql-or-mariadb/
+
+
+The mysqldump command’s general syntax is:
+
+# mysqldump -u [username] -p [databaseName] > [filename]-$(date +%F).sql
+
+# mysqldump -u root -p wordpress > sqldata-$(date +%F).sql
+
+Create a backup of an entire Database Management System (DBMS):
+
+# mysqldump --all-databases --single-transaction --quick --lock-tables=false > full-backup-$(date +%F).sql -u root -p
+
+#  mysqldump -u root -p --all-databases > compleate_backup.sql  /// all databases backup 
+
+autoback up script in cron 
+
+0 1 * * * /usr/bin/mysqldump --defaults-extra-file=/home/example_user/.my.cnf -u root --single-transaction --quick --lock-tables=false --all-databases > full-backup-$(date +%F).sql
+
+
+mysqldump  -u root -p kgk_uat > KGK_UAT_full-backup-$(date +%F).sql
+
+mysqldump  -u root -p --all-databases --single-transaction --flush-logs --lock-tables=false > KGK_UAT_full-backup-$(date +%F).sql
+
+-------------------------------------------------------------------------------------------------------------------------
+
+to retore use below ...
+
+
+mysql -u [username] -p [databaseName] < [filename]-$(date +%F).sql
+
+
+scp source_file_name username@destination_host:destination_folder
+
+
+mysqldump petboox_dev --single-transaction --quick --lock-tables=false > petbox_dev.sql -u petbooxdev -p 
+
+
+-----------------------------------------------------------------------------------------------
+
+mysqldump kgk_production > kgk_production130319.sql '--ignore-table=kgk_production.master_inventory_history'

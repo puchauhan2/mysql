@@ -1,0 +1,28 @@
+
+CREATE USER 'root'@'ip_address' IDENTIFIED BY 'some_pass';
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'ip_address';
+
+GRANT ALL PRIVILEGES ON *.* TO 'puneet'@'10.50.250.46' IDENTIFIED BY 'India@123@india';
+
+
+CHANGE MASTER TO
+          MASTER_HOST = 10.50.0.92,
+          MASTER_PORT = 3306,
+          MASTER_USER = root,
+          MASTER_PASSWORD = India@123@india,
+          MASTER_AUTO_POSITION = 1;
+
+
+CHANGE MASTER TO MASTER_HOST = '10.50.0.92', MASTER_USER = 'root', MASTER_PASSWORD = 'India@123@india', MASTER_AUTO_POSITION = 1;
+
+
+
+CHANGE MASTER TO MASTER_HOST = '10.50.0.92', MASTER_USER = 'root', MASTER_PASSWORD = 'India@123@india', MASTER_LOG_FILE = 'mysql-bin.000007', MASTER_LOG_POS = 154;
+
+
+
+CREATE USER 'pbdev'@'%' IDENTIFIED BY 'dfr$u^k!udk';
+GRANT ALL PRIVILEGES ON pb_dev.* TO 'pbdev'@'%' IDENTIFIED BY 'dfr$u^k!udk';
+
+
